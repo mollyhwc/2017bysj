@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramEpc", "ProgramEpc\ProgramEpc.csproj", "{C96B805D-4F4D-493C-B5D1-556FB810446A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTagsAsync", "..\ReadTagsAsync\ReadTagsAsync\ReadTagsAsync.csproj", "{EB282AC6-0600-4A54-8313-9FA0D23A6C4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TxPowerRamp", "..\TxPowerRamp\TxPowerRamp\TxPowerRamp.csproj", "{70439485-5017-437D-AB57-04DB5EE16C66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C96B805D-4F4D-493C-B5D1-556FB810446A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C96B805D-4F4D-493C-B5D1-556FB810446A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C96B805D-4F4D-493C-B5D1-556FB810446A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C96B805D-4F4D-493C-B5D1-556FB810446A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB282AC6-0600-4A54-8313-9FA0D23A6C4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB282AC6-0600-4A54-8313-9FA0D23A6C4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB282AC6-0600-4A54-8313-9FA0D23A6C4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB282AC6-0600-4A54-8313-9FA0D23A6C4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70439485-5017-437D-AB57-04DB5EE16C66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70439485-5017-437D-AB57-04DB5EE16C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70439485-5017-437D-AB57-04DB5EE16C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70439485-5017-437D-AB57-04DB5EE16C66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

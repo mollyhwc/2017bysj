@@ -1,0 +1,35 @@
+﻿<Window x:Class="WpfApplication2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525"
+        WindowStartupLocation="CenterScreen">
+
+
+        
+       
+       
+        <Grid Name="grad1" ShowGridLines="True" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="0,0,0,0.143">
+            <Grid.RowDefinitions>
+                <RowDefinition  />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+             </Grid.ColumnDefinitions>
+       
+        <Image Grid.ColumnSpan="6" Grid.RowSpan="5" Grid.Column="0" Grid.Row="0" Source="Resources/1.jpg" Stretch="Fill" Margin="0,0,0.429,0.114"  />
+        <Button Content="查询"  Background="White" Grid.Column="1" HorizontalAlignment="Left" Margin="0.429,9.886,0,0" Grid.Row="5" VerticalAlignment="Top" Width="85" Height="33" Click="Button_Click_1"/>
+        <Button Content="导出" Background="White" Grid.Column="4" HorizontalAlignment="Left" Margin="0.429,10.429,0,0" Grid.Row="5" VerticalAlignment="Top" Width="87" Height="32" Grid.ColumnSpan="2"/>
+    </Grid>
+
+    
+</Window>

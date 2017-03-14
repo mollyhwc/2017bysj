@@ -1,0 +1,16 @@
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\bin\Debug\WpfApplication2.exe.config
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\bin\Debug\WpfApplication2.exe
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\bin\Debug\WpfApplication2.pdb
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\InqueryPage.baml
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\login.baml
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\MainWindow.baml
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\InqueryPage.g.cs
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\login.g.cs
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\MainWindow.g.cs
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\App.g.cs
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\WpfApplication2_MarkupCompile.cache
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\WpfApplication2.g.resources
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\WpfApplication2.Properties.Resources.resources
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\nursingHome.csproj.GenerateResource.Cache
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\WpfApplication2.exe
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\WpfApplication2\WpfApplication2\obj\Debug\WpfApplication2.pdb

@@ -1,0 +1,9 @@
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\bin\Debug\ProgramEpc.exe.config
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\bin\Debug\ProgramEpc.exe
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\bin\Debug\ProgramEpc.pdb
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\bin\Debug\Impinj.OctaneSdk.dll
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\bin\Debug\LLRP.dll
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\bin\Debug\LLRP.Impinj.dll
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\bin\Debug\Impinj.OctaneSdk.xml
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\obj\Debug\ProgramEpc.exe
+c:\users\黄小仙儿\documents\visual studio 2012\Projects\ProgramEpc\ProgramEpc\obj\Debug\ProgramEpc.pdb
