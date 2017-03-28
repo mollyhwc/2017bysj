@@ -9,12 +9,12 @@ WpfApplication2
 none
 false
 DEBUG;TRACE
-C:\Users\黄小仙儿\Documents\Visual Studio 2012\Projects\WpfApplication2\WpfApplication2\App.xaml
-3-1284452530
 
-119031378
+5-617674623
+
+12-1902737140
 16-1874263549
-InqueryPage.xaml;login.xaml;MainWindow.xaml;
+App.xaml;InqueryPage.xaml;login.xaml;MainWindow.xaml;test.xaml;
 
 False
 

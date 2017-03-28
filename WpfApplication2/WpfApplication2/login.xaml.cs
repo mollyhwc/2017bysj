@@ -48,11 +48,14 @@ namespace WpfApplication2
             {
                 if (rd.Read())//判断是否存在用户输入的用户名和密码
                 {
+                    
                     MessageBox.Show("登陆成功");
                     con.Close();
                     this.Hide();
                     MainWindow NewWindow = new MainWindow();
-                    NewWindow.Show(); 
+                    NewWindow.Show();
+               
+
                 }
 
                 else
@@ -62,11 +65,7 @@ namespace WpfApplication2
                     username.Text = "";
                     password.Password = "";
                 }
-            }
-
-
-
-           
+            } 
          
         }
     }

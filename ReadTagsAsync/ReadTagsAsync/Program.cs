@@ -75,7 +75,7 @@ namespace ReadTagsAsync
             foreach (Tag tag in args.TagReport.Tags)
             {
                 Console.WriteLine("EPC : {0} Antenna : {1}, RSSI:{2}",
-                    tag.Epc, tag.AntennaPortNumber,tag.PeakRssiInDbm);
+                    tag.Epc, tag.AntennaPortNumber,tag.ReaderIdentity);
             }
         }
     }

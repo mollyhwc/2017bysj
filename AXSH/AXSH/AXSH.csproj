@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E80D0C81-30CA-45E6-BDF3-A1CFDD5D2546}</ProjectGuid>
+    <ProjectGuid>{F2B377C3-B56E-4DE2-8057-C4C8E4217941}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WpfApplication2</RootNamespace>
-    <AssemblyName>WpfApplication2</AssemblyName>
+    <RootNamespace>AXSH</RootNamespace>
+    <AssemblyName>AXSH</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Impinj.OctaneSdk">
+      <HintPath>B:\pangpang\英频杰\Octane SDK (.NET) v1.0.0\OctaneSdk\Libraries\Debug\Impinj.OctaneSdk.dll</HintPath>
+    </Reference>
+    <Reference Include="LLRP">
+      <HintPath>B:\pangpang\英频杰\Octane SDK (.NET) v1.0.0\OctaneSdk\Libraries\Debug\LLRP.dll</HintPath>
+    </Reference>
+    <Reference Include="LLRP.Impinj">
+      <HintPath>B:\pangpang\英频杰\Octane SDK (.NET) v1.0.0\OctaneSdk\Libraries\Debug\LLRP.Impinj.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -109,7 +118,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\1.jpg" />
+    <Resource Include="Resources\1.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\2.jpg" />
