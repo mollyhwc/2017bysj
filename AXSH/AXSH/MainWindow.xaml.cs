@@ -62,12 +62,12 @@ namespace AXSH
 
             for (int i = 1; i < 7; i++)
             {
-                ArrayList room = RoomInformationList(roomNameList[i - 1], 2, 2 * i - 1);
+                ArrayList room = RoomInformationList(roomNameList[i - 1], 2, 2 * (i - 1));
                 roomList.Add(room);
             }
             for (int i = 7; i < 13; i++)
             {
-                ArrayList room = RoomInformationList(roomNameList[i - 1], 9, (2 * (i - 6) - 1));
+                ArrayList room = RoomInformationList(roomNameList[i - 1], 9, (2 * ((i - 6) - 1)));
                 roomList.Add(room);
             }
             /**
@@ -152,15 +152,15 @@ namespace AXSH
             {
                 array1.Add(personInformation(id[i], 22, 0, 0, 0, 0, 0, 0));
             }
-            for (int i = 2; i < 6; i++)
+            for (int i = 2; i < 7; i++)
             {
                 Image image = new Image();
                 Imagelist.Add(image);
                 grad1.Children.Add(image);
-                image.Source = new BitmapImage(new Uri(@"Resources\" + i + ".jpg", UriKind.Relative));
-                Console.Write(image.Source);
+                image.Source = new BitmapImage(new Uri(@"Resources\" + i + ".jpg", UriKind.Relative));              
                 image.Stretch = Stretch.None;
             }
+        
             timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += new EventHandler(changePosition);  //你的事件
             timer.Start();
@@ -172,11 +172,10 @@ namespace AXSH
             Random rnd = new Random();
             for (int i = 0; i < id.Length; i++)
             {
-                if (id[rnd.Next(0, 4)].Equals(id[i]))
+                if (id[rnd.Next(0, 5)].Equals(id[i]))
                 {
-                    int roomIndex = rnd.Next(0, 11);
-                    Console.WriteLine(roomIndex);
-                    setRssi(i, rnd.NextDouble() * (-25) - 35, rnd.Next(1, 4), (String)roomList[roomIndex][0]);
+                    int roomIndex = rnd.Next(0, 12);
+                    setRssi(i, rnd.NextDouble() * (-25) - 35, rnd.Next(1, 5), (String)roomList[roomIndex][0]);
                     double[,] pos = new double[2, 4];
                     for (int j = 1; j < array1[0].Count - 3; j++)
                     {
@@ -186,7 +185,7 @@ namespace AXSH
                     sortPosition(pos);
                     double[] colRow = getColRow(pos);
                     array1[i][6] = (int)colRow[0];
-                    array1[i][7] = (int)colRow[1];
+                    array1[i][7] = (int)colRow[1]; 
                     ((Image)Imagelist[i]).SetValue(Grid.RowProperty, (int)colRow[0] + (int)roomList[roomIndex][1]);
                     ((Image)Imagelist[i]).SetValue(Grid.ColumnProperty, (int)colRow[1] + (int)roomList[roomIndex][2]);
                 }

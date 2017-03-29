@@ -29,11 +29,25 @@ namespace AXSH
             bool isFind = false;
             String oldId = ID.Text;
             List<ArrayList> array = MainWindow.array1;
+            String area;
             for (int i = 0; i < array.Count; i++)
             {
-                if (oldId.Equals(array[i][0]))
+              if (oldId.Equals(array[i][0]))
                 {
-                    MessageBox.Show("您好，编号" + array[i][0] + "的老人在" + ((int)array[i][5]).ToString() + "号房间");
+                    if ((int)array[i][6] == 0 && (int)array[i][7] == 0) {
+                        area = "A";
+                    }else if ((int)array[i][6] == 0 && (int)array[i][7] == 1)
+                    {
+                        area = "B";
+                    }
+                    else if ((int)array[i][6] == 1 && (int)array[i][7] == 0)
+                    {
+                        area = "C";
+                    }
+                    else 
+                        area = "D";
+                   
+                    MessageBox.Show("您好，编号" + array[i][0] + "的老人在" + ((int)array[i][5]).ToString() + "号房间"+ area + "区");
                     isFind = true;
                     break;
                 }
