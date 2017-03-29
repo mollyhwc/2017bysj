@@ -29,7 +29,9 @@ namespace AXSH2
             bool isFind = false;
             String oldId = ID.Text;
             String area;
-            List<ArrayList> array = MainWindow.array1;
+            MainWindow m = new MainWindow();
+            List<PersonInformation> array = m.getArray();
+            /*
             for (int i = 0; i < array.Count; i++)
             {
                 if (oldId.Equals(array[i][0]))
@@ -53,7 +55,7 @@ namespace AXSH2
                 }
             }
             if (!isFind) { MessageBox.Show("抱歉，没有找到相关的信息"); }
-
+            */
         }
 
         private void Button_Exit(object sender, RoutedEventArgs e)

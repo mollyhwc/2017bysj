@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Data.OleDb;
 using Impinj.OctaneSdk;
-
+using System.IO;
 namespace AXSH2
 {
     /// <summary>
@@ -31,9 +31,10 @@ namespace AXSH2
         List<String> roomNameList = new List<String>();
         List<ArrayList> roomList = new List<ArrayList>();
         List<ArrayList> atennuList = new List<ArrayList>();
-        public static List<ArrayList> array1 = new List<ArrayList>();
+        List<ArrayList> readerList = new List<ArrayList>();
+        public List<PersonInformation> array1 = new List<PersonInformation>();
         string[] id = { "2222", "3333", "4444", "5555", "6666" };
-        int[] antennaX ={ 1,1,1,5,5,5,9,9,9};
+        int[] antennaX = { 1, 1, 1, 5, 5, 5, 9, 9, 9 };
         int[] antennaY = { 1, 5, 9, 1, 5, 9, 1, 5, 9 };
         DispatcherTimer timer = new DispatcherTimer();
 
@@ -62,104 +63,211 @@ namespace AXSH2
             roomNameList.Add("AAAAAAAAAAAA");
             roomNameList.Add("BBBBBBBBBBBB");
             roomNameList.Add("CCCCCCCCCCCC");
-            //初始化房间信息
+
+            //initialize reader
+            for (int i = 0; i < roomNameList.Count; i++)
+            {
+                ArrayList reader = new ArrayList();
+                reader.Add(roomNameList[i]);
+                reader.Add(i / 3);//(0,1,2)--0/(1,2,3)--1/(3,4,5)--2/(4,5,6)--3
+                readerList.Add(reader);
+            }
+
+            //initialize room[the roomId is from 1-12]
             for (int i = 1; i < 7; i++)
             {
-                ArrayList room = RoomOrAntennaInformationList(roomNameList[i - 1], 2, 2 * i - 1);
+                ArrayList room = RoomOrAntennaInformationList(i, 2, 2 * (i - 1));
                 roomList.Add(room);
             }
             for (int i = 7; i < 13; i++)
             {
-                ArrayList room = RoomOrAntennaInformationList(roomNameList[i - 1], 9, (2 * (i - 6) - 1));
+                ArrayList room = RoomOrAntennaInformationList(i, 9, (2 * ((i - 6) - 1)));
                 roomList.Add(room);
             }
-            //初始化每个房间的天线信息
-            for (int i = 0; i < 9; i++) { 
-            ArrayList antenna= RoomOrAntennaInformationList((i+1).ToString(), antennaX[i], antennaY[i]);
-            atennuList.Add(antenna);
+            //initialize antenna 
+            for (int i = 0; i < 9; i++)
+            {
+                ArrayList antenna = RoomOrAntennaInformationList(i + 1, antennaX[i], antennaY[i]);
+                atennuList.Add(antenna);
             }
-                /**
-                //假设将12个阅读器全部加入到里面
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-                MacList.Add("SpeedwayR-xx-xx-xx");
-             
-                    //初始化阅读器
-                for (int i = 0; i < 12; i++)
-                {
-                        SpeedwayReader Reader = new SpeedwayReader();
-                        ReaderList.Add(Reader);
-                        Console.WriteLine(ReaderList[i]);
-                    
-                    try
-                    {
-                        // Connect to the reader.        
-                        // Replace "SpeedwayR-xx-xx-xx" with your       
-                        // reader's host name or IP address.      
-                        SpeedwayReader readertemp = (SpeedwayReader)ReaderList[i];
-                        string macString = (String)MacList[i];
-                        readertemp.Connect(macString);
-                  
-                        // Remove all settings from the reader.              
-                        readertemp.ClearSettings();
+            //初始化每个人的信息。
+            for (int i = 0; i < 5; i++)
+            {
+                PersonInformation p = new PersonInformation(id[i], 0, 0, 0);
 
-                        // Get the factory default settings            
-                        // We'll use these as a starting point              
-                        // and then modify the settings we're              
-                        // interested in          
-                        Settings settings = readertemp.QueryFactorySettings();
-                        settings.Report.IncludeAntennaPortNumber = true;
-                        settings.Report.Mode = ReportMode.Individual;
-                        readertemp.ApplySettings(settings);
-
-                        // Assign the TagsReported handler.      
-                        // This specifies which function to call    
-                        // when tags reports are available.         
-                        // This function will in turn call a delegate    
-                        // to update the UI (Listbox).      
-                        readertemp.TagsReported += new EventHandler<TagsReportedEventArgs>(OnTagsReported);
-                    }
-                    catch (OctaneSdkException ex)
-                    {
-                        // An Octane SDK exception occurred. Handle it here.       
-                        System.Diagnostics.Trace.WriteLine("An Octane SDK exception has occured : {0}", ex.Message);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Trace.WriteLine("An exception has occured : {0}", ex.Message);
-                        }            
-                    }
-                */
-
-                //初始化每个人的信息。
-                for (int i = 0; i < 5; i++)
-                {
-                    array1.Add(personInformation(id[i], 22, 0, 0, 0, 0, 0, 0));
-                }
-            for (int i = 2; i < 6; i++)
+                array1.Add(p);
+            }
+            for (int i = 2; i < 7; i++)
             {
                 Image image = new Image();
                 Imagelist.Add(image);
                 grad1.Children.Add(image);
                 image.Source = new BitmapImage(new Uri(@"Resources\" + i + ".jpg", UriKind.Relative));
-                Console.Write(image.Source);
+
                 image.Stretch = Stretch.None;
             }
-            timer.Interval = TimeSpan.FromMilliseconds(1000);
-            timer.Tick += new EventHandler(changePosition);  //你的事件
-            timer.Start();
 
+            timer.Interval = TimeSpan.FromMilliseconds(1000);
+            // timer.Tick += new EventHandler(GetTimeStamp);  //你的事件
+            //timer.Start();
+
+
+            /**
+            //假设将12个阅读器全部加入到里面
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+            MacList.Add("SpeedwayR-xx-xx-xx");
+             
+           //初始化阅读器
+            for (int i = 0; i < 12; i++)
+            {
+                    SpeedwayReader Reader = new SpeedwayReader();
+                    ReaderList.Add(Reader);
+                    Console.WriteLine(ReaderList[i]);
+                    
+                try
+                {
+                    // Connect to the reader.        
+                    // Replace "SpeedwayR-xx-xx-xx" with your       
+                    // reader's host name or IP address.      
+                    SpeedwayReader readertemp = (SpeedwayReader)ReaderList[i];
+                    string macString = (String)MacList[i];
+                    readertemp.Connect(macString);
+                  
+                    // Remove all settings from the reader.              
+                    readertemp.ClearSettings();
+
+                    // Get the factory default settings            
+                    // We'll use these as a starting point              
+                    // and then modify the settings we're              
+                    // interested in          
+                    Settings settings = readertemp.QueryFactorySettings();
+                    settings.Report.IncludeAntennaPortNumber = true;
+                    settings.Report.Mode = ReportMode.Individual;
+                    readertemp.ApplySettings(settings);
+
+                    // Assign the TagsReported handler.      
+                    // This specifies which function to call    
+                    // when tags reports are available.         
+                    // This function will in turn call a delegate    
+                    // to update the UI (Listbox).      
+                    readertemp.TagsReported += new EventHandler<TagsReportedEventArgs>(OnTagsReported);
+                }
+                catch (OctaneSdkException ex)
+                {
+                    // An Octane SDK exception occurred. Handle it here.       
+                    System.Diagnostics.Trace.WriteLine("An Octane SDK exception has occured : {0}", ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Trace.WriteLine("An exception has occured : {0}", ex.Message);
+                    }            
+                }
+            */
         }
 
+        //time stamp
+        public String GetTimeStamp()
+        {
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+
+            return Convert.ToInt64(ts.TotalSeconds).ToString();
+        }
+
+        //monitor the detected rssi of each person 对每一个人进行循环 设置他们的rssi 首先判断时间戳
+        //如果相同 则看是否已经设置了三个rssi 设置达到三个为止
+        //时间不同 经该对象的
+        void rssiDetection()
+        {
+            Random rnd = new Random();
+
+            for (int i = 0; i < id.Length; i++)
+            {
+
+                if (GetTimeStamp().Equals(array1[i].getTime()))
+                {//if time stamp is eaqual
+                    int listNowCount = array1[i].getNumList();
+                    if (listNowCount == 3)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        int detctedCount = rnd.Next(2, 6);
+                        int loopTime = detctedCount > (3 - listNowCount) ? (3 - listNowCount) : detctedCount;
+                        addRssi(loopTime, i);
+                    }
+                }
+                else
+                {
+                    array1[i].setListEmpty();
+                    int detctedCount = rnd.Next(2, 6);
+                    if (detctedCount > 3){ 
+                        addRssi(3, i); }
+                    else{
+                        addRssi(detctedCount, i);}
+                }
+                array1[i].setTime(GetTimeStamp());
+            }
+        }
+
+        //the detected rssi add to the personInformation
+        private void addRssi(int loopTime, int index)
+        {
+            Random rnd = new Random();
+            for (int j = 0; j < loopTime; j++)
+            {
+                int atennaNum = rnd.Next(1, 5);
+                double rssi = rnd.NextDouble() * (-31) - 35;
+                int roomId = rnd.Next(1, 13);
+                ArrayList rssiCondition = new ArrayList();
+                rssiCondition.Add(rssi);
+                rssiCondition.Add(atennaNum);
+                rssiCondition.Add(roomId);
+                array1[index].addListElement(rssiCondition);
+            }
+        }
+
+        //calculate the position(xpos,ypos) 
+        public int[] calculatePos(PersonInformation p){
+            double [,]disAndAtenna=new double[2,3];
+
+            if (p.getNumList() == 3)
+            {   
+               List<ArrayList> posList= p.getList();
+               for (int i = 0; i < 3; i++)
+               {
+                   double distance = formula((double)posList[i][0]);
+                   disAndAtenna[0,i]=distance;
+                   disAndAtenna[1,i]=(double)posList[i][1];
+               }
+                return pos;
+            }
+            else { 
+            pos[0]=-1;
+            pos[1]=-1;
+            return pos;
+            }
+            
+        }
+        //the formula of calcualte rssi and distance
+        public double formula(double rssi)
+        {
+            double distance = Math.Pow(10, (rssi + 64.148) / (-1.49875));
+            return distance;
+        }
+
+        
+        /*
         void changePosition(object sender, EventArgs e)
         {
             Random rnd = new Random();
@@ -168,8 +276,9 @@ namespace AXSH2
                 if (id[rnd.Next(0, 5)].Equals(id[i]))
                 {
                     int roomIndex = rnd.Next(0, 12);
-                    if (i == 4) {
-                        Console.WriteLine(id[i]+roomIndex);
+                    if (i == 4)
+                    {
+                        Console.WriteLine(id[i] + roomIndex);
                     }
                     setRssi(i, rnd.NextDouble() * (-25) - 35, rnd.Next(1, 5), (String)roomList[roomIndex][0]);
                     double[,] pos = new double[2, 4];
@@ -188,9 +297,9 @@ namespace AXSH2
             }
             updateListbox(array1);
         }
-     
+        */
         //对每个房间或者天线进行初始化
-        public ArrayList RoomOrAntennaInformationList(String ID, int startX, int startY)
+        public ArrayList RoomOrAntennaInformationList(int ID, int startX, int startY)
         {
             ArrayList room = new ArrayList();
             room.Add(ID);
@@ -199,20 +308,6 @@ namespace AXSH2
             return room;
         }
 
-        //对每一个人的信息进行初始化
-        public ArrayList personInformation(string ID, double rssi1, double rssi2, double rssi3, double rssi4, int rooomNum, int xpos, int ypos)
-        {
-            ArrayList person = new ArrayList();
-            person.Add(ID);
-            person.Add(rssi1);//
-            person.Add(rssi2);//rssi
-            person.Add(rssi3);//tianxian shumu
-            person.Add(rssi4);
-            person.Add(rooomNum);
-            person.Add(xpos);
-            person.Add(ypos);
-            return person;
-        }
 
         private void Button_Find(object sender, RoutedEventArgs e)
         {
@@ -355,36 +450,9 @@ namespace AXSH2
             Application.Current.Shutdown();
         }
 
-        //匹配ID进行信息的修改
-        public void setInformation(string id, double ssr1, double ssr2, double ssr3, double ssr4, int room)//这里的room根据房间来定位
-        {
-            for (int i = 0; i < array1.Count; i++)
-            {
-                if (array1[i][0].Equals(id))
-                {
-                    array1[i][1] = ssr1;
-                    array1[i][2] = ssr2;
-                    array1[i][3] = ssr3;
-                    array1[i][4] = ssr4;
-                    array1[i][5] = room;
-                }
-            }
-        }
-        //设置天线对应的rssi
-        public void setRssi(int number, double rssi, int numberAntenna, String roomNumber)
-        {
-            array1[number][numberAntenna] = rssi;
-            for (int i = 0; i < roomList.Count; i++)
-            {
-                if (roomNumber.Equals(roomList[i][0]))
-                {
-                    array1[number][5] = i + 1;
-                    Console.WriteLine("函数"+(i+1).ToString());
-                  
-                    break;
-                }
-            }
-        }
+
+
+
         //判断是在哪个区域
         public double[] getColRow(double[,] pos)
         {
@@ -454,6 +522,11 @@ namespace AXSH2
                 }
             }
             return pos;
+        }
+        //return array1;
+        public List<PersonInformation> getArray()
+        {
+            return array1;
         }
     }
 }

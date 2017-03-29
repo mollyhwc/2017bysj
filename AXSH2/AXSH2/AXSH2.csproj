@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Centroid.cs" />
+    <Compile Include="Coordinate.cs" />
+    <Compile Include="PersonInformation.cs" />
     <Compile Include="Round.cs" />
     <Page Include="InqueryPage.xaml">
       <SubType>Designer</SubType>
@@ -132,6 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\6.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

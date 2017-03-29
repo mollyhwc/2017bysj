@@ -16,7 +16,7 @@ namespace AXSH2
 
         public Round(double x, double y, double r)
         {
-            
+
             this.x = x;
             this.y = y;
             this.r = r;
