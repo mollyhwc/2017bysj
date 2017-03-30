@@ -23,6 +23,11 @@ namespace AXSH2
             this.xpos = xpos;
             this.ypos = ypos;
         }
+        //get id
+        public String getId()
+        {
+            return id;
+        }
 
         //get nums of rssi
         public int getNumList()
@@ -55,6 +60,22 @@ namespace AXSH2
         public List<ArrayList> getList()
         {
             return positionList;
+        }
+        //get roomid
+        public int getRoomId()
+        {
+
+            return roomId;
+        }
+        //get xpos
+        public int getxpos()
+        {
+            return xpos;
+        }
+        //get ypos
+        public int getypos()
+        {
+            return ypos;
         }
     }
 }

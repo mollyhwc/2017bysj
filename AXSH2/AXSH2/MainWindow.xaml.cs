@@ -34,8 +34,8 @@ namespace AXSH2
         List<ArrayList> readerList = new List<ArrayList>();
         public List<PersonInformation> array1 = new List<PersonInformation>();
         string[] id = { "2222", "3333", "4444", "5555", "6666" };
-        int[] antennaX = { 1, 1, 1, 5, 5, 5, 9, 9, 9 };
-        int[] antennaY = { 1, 5, 9, 1, 5, 9, 1, 5, 9 };
+        int[] antennaX = { 0, 0, 0, 9, 9, 9, 19, 19, 19 };
+        int[] antennaY = { 0, 9, 19, 0, 9, 19, 0, 9, 19 };
         DispatcherTimer timer = new DispatcherTimer();
 
         // Create an instance of the SpeedwayReader class.  
@@ -76,12 +76,12 @@ namespace AXSH2
             //initialize room[the roomId is from 1-12]
             for (int i = 1; i < 7; i++)
             {
-                ArrayList room = RoomOrAntennaInformationList(i, 2, 2 * (i - 1));
+                ArrayList room = RoomOrAntennaInformationList(i, 2, 1 + (i - 1) * 20);
                 roomList.Add(room);
             }
             for (int i = 7; i < 13; i++)
             {
-                ArrayList room = RoomOrAntennaInformationList(i, 9, (2 * ((i - 6) - 1)));
+                ArrayList room = RoomOrAntennaInformationList(i, 35, (20 * (i - 7) + 1));
                 roomList.Add(room);
             }
             //initialize antenna 
@@ -103,13 +103,12 @@ namespace AXSH2
                 Imagelist.Add(image);
                 grad1.Children.Add(image);
                 image.Source = new BitmapImage(new Uri(@"Resources\" + i + ".jpg", UriKind.Relative));
-
                 image.Stretch = Stretch.None;
             }
 
             timer.Interval = TimeSpan.FromMilliseconds(1000);
-            // timer.Tick += new EventHandler(GetTimeStamp);  //你的事件
-            //timer.Start();
+            timer.Tick += new EventHandler(rssiDetection);  //你的事件
+            timer.Start();
 
 
             /**
@@ -186,7 +185,7 @@ namespace AXSH2
         //monitor the detected rssi of each person 对每一个人进行循环 设置他们的rssi 首先判断时间戳
         //如果相同 则看是否已经设置了三个rssi 设置达到三个为止
         //时间不同 经该对象的
-        void rssiDetection()
+        void rssiDetection(object sender, EventArgs e)
         {
             Random rnd = new Random();
 
@@ -211,24 +210,45 @@ namespace AXSH2
                 {
                     array1[i].setListEmpty();
                     int detctedCount = rnd.Next(2, 6);
-                    if (detctedCount > 3){ 
-                        addRssi(3, i); }
-                    else{
-                        addRssi(detctedCount, i);}
+                    if (detctedCount > 3)
+                    {
+                        addRssi(3, i);
+                    }
+                    else
+                    {
+                        addRssi(detctedCount, i);
+                    }
                 }
+
                 array1[i].setTime(GetTimeStamp());
+                int[] pos = calculatePos((PersonInformation)array1[i]);
+                if (pos[0] != -1 && pos[1] != -1)
+                {
+                    ((Image)Imagelist[i]).SetValue(Grid.RowProperty, pos[0]);
+                    ((Image)Imagelist[i]).SetValue(Grid.ColumnProperty, pos[1]);
+                }
             }
+            updateListbox(array1);
         }
+
 
         //the detected rssi add to the personInformation
         private void addRssi(int loopTime, int index)
         {
+            int atennaNum;
+            double rssi;
             Random rnd = new Random();
+            int roomId = rnd.Next(1, 13);
+            ArrayList tempList = new ArrayList();
             for (int j = 0; j < loopTime; j++)
             {
-                int atennaNum = rnd.Next(1, 5);
-                double rssi = rnd.NextDouble() * (-31) - 35;
-                int roomId = rnd.Next(1, 13);
+                atennaNum = rnd.Next(1, 5);
+                while (tempList.Contains(atennaNum)) {
+                    atennaNum = rnd.Next(1, 5);
+                }
+                tempList.Add(atennaNum);
+
+                rssi = rnd.NextDouble() * (-28) - 38;
                 ArrayList rssiCondition = new ArrayList();
                 rssiCondition.Add(rssi);
                 rssiCondition.Add(atennaNum);
@@ -238,66 +258,69 @@ namespace AXSH2
         }
 
         //calculate the position(xpos,ypos) 
-        public int[] calculatePos(PersonInformation p){
-            double [,]disAndAtenna=new double[2,3];
-
+        public int[] calculatePos(PersonInformation p)
+        {
+            int[] pos = new int[2];
+            List<Round> round = new List<Round>();
             if (p.getNumList() == 3)
-            {   
-               List<ArrayList> posList= p.getList();
-               for (int i = 0; i < 3; i++)
-               {
-                   double distance = formula((double)posList[i][0]);
-                   disAndAtenna[0,i]=distance;
-                   disAndAtenna[1,i]=(double)posList[i][1];
-               }
+            {
+                List<ArrayList> posList = p.getList();
+                for (int i = 0; i < 3; i++)
+                {
+                    double distance = formula((double)posList[i][0]);
+                    int roomx = 0;
+                    int roomy = 0;
+                    //find xpos and ypos of room
+                    for (int j = 0; j < roomList.Count; j++)
+                    {
+                        if ((int)roomList[j][0] == (int)posList[i][2])
+                        {
+                            roomx = (int)roomList[j][1];
+                            roomy = (int)roomList[j][2];
+                            break;
+                        }
+                    }
+                    //find xpos and ypos of antenna
+                    int antennax = 0;
+                    int antennay = 0;
+                    for (int k = 0; k < atennuList.Count; k++)
+                    {
+                        if ((int)atennuList[k][0] == (int)posList[i][1])
+                        {
+                            antennax = (int)atennuList[k][1];
+                            antennay = (int)atennuList[k][2];
+                            break;
+                        }
+                    }
+                    int x = roomx + antennax;
+                    int y = roomy + antennay;
+                    Round r = new Round( x * 20, y * 20, distance);
+                    round.Add(r);
+
+                }
+                Coordinate coor = Centroid.triCentroid((Round)round[0], (Round)round[1], (Round)round[1]);
+                if (coor != null)
+                {
+                    pos[0] = (int)((double)coor.getX());
+                    pos[1] = (int)((double)coor.getY());
+                    return pos;
+                }
+
+                pos[0] = -1;
+                pos[1] = -1;
                 return pos;
             }
-            else { 
-            pos[0]=-1;
-            pos[1]=-1;
+            pos[0] = -1;
+            pos[1] = -1;
             return pos;
-            }
-            
         }
         //the formula of calcualte rssi and distance
         public double formula(double rssi)
         {
-            double distance = Math.Pow(10, (rssi + 64.148) / (-1.49875));
+            double distance = Math.Pow(10, (rssi + 35.297) / (-14.794));
             return distance;
         }
 
-        
-        /*
-        void changePosition(object sender, EventArgs e)
-        {
-            Random rnd = new Random();
-            for (int i = 0; i < id.Length; i++)
-            {
-                if (id[rnd.Next(0, 5)].Equals(id[i]))
-                {
-                    int roomIndex = rnd.Next(0, 12);
-                    if (i == 4)
-                    {
-                        Console.WriteLine(id[i] + roomIndex);
-                    }
-                    setRssi(i, rnd.NextDouble() * (-25) - 35, rnd.Next(1, 5), (String)roomList[roomIndex][0]);
-                    double[,] pos = new double[2, 4];
-                    for (int j = 1; j < array1[0].Count - 3; j++)
-                    {
-                        pos[0, j - 1] = (double)array1[i][j];
-                        pos[1, j - 1] = j;
-                    }
-                    sortPosition(pos);
-                    double[] colRow = getColRow(pos);
-                    array1[i][6] = (int)colRow[0];
-                    array1[i][7] = (int)colRow[1];
-                    ((Image)Imagelist[i]).SetValue(Grid.RowProperty, (int)colRow[0] + (int)roomList[roomIndex][1]);
-                    ((Image)Imagelist[i]).SetValue(Grid.ColumnProperty, (int)colRow[1] + (int)roomList[roomIndex][2]);
-                }
-            }
-            updateListbox(array1);
-        }
-        */
         //对每个房间或者天线进行初始化
         public ArrayList RoomOrAntennaInformationList(int ID, int startX, int startY)
         {
@@ -344,12 +367,12 @@ namespace AXSH2
         }
 
         //simulation
-        private void updateListbox(List<ArrayList> list)
+        private void updateListbox(List<PersonInformation> list)
         {
             // Loop through each tag is the list and add it to the Listbox.              
             foreach (var tag in list)
             {
-                listTags.Items.Add("老人" + tag[0] + "在" + tag[5] + "号房间");
+                listTags.Items.Add("老人" + tag.getId() + "在" + tag.getRoomId() + "号房间");
             }
         }
         /* 

@@ -18,3 +18,4 @@ c:\users\黄小仙儿\documents\visual studio 2012\Projects\AXSH2\AXSH2\obj\Debu
 c:\users\黄小仙儿\documents\visual studio 2012\Projects\AXSH2\AXSH2\obj\Debug\AXSH2.csproj.GenerateResource.Cache
 c:\users\黄小仙儿\documents\visual studio 2012\Projects\AXSH2\AXSH2\obj\Debug\AXSH2.exe
 c:\users\黄小仙儿\documents\visual studio 2012\Projects\AXSH2\AXSH2\obj\Debug\AXSH2.pdb
+C:\Users\黄小仙儿\documents\visual studio 2012\Projects\AXSH2\AXSH2\obj\Debug\AXSH2.csprojResolveAssemblyReference.cache

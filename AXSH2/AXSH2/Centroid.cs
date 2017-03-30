@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Math;
 using System.Collections;
 namespace AXSH2
 {
@@ -18,8 +17,7 @@ namespace AXSH2
 	 * @return  Coordinate对象
 	 */
         public static Coordinate triCentroid(Round r1, Round r2, Round r3) {
-		
-		/*有效交叉点1*/
+        /*有效交叉点1*/
 		Coordinate p1 = null;
 		/*有效交叉点2*/
 		Coordinate p2 = null;
@@ -50,6 +48,7 @@ namespace AXSH2
 				}
 			}
 		} else {//没有交点定位错误
+            Console.WriteLine("-----------R1和R2交点为空-----------------");
 			return null;
 		}
 		
@@ -75,10 +74,11 @@ namespace AXSH2
 				}
 			}
 		} else {//没有交点定位错误
+            Console.WriteLine("-----------R1和R3交点为空-----------------");
 			return null;
 		}
 		
-		/*r1,r2交点*/
+		/*r3,r2交点*/
 		List<Coordinate> intersections3 = intersection(r2.getX(), r2.getY(), r2.getR(),
 											r3.getX(), r3.getY(), r3.getR());
 		
@@ -99,6 +99,7 @@ namespace AXSH2
 				}
 			}
 		} else {//没有交点定位错误
+            Console.WriteLine("-----------R2和R3交点为空-----------------");
 			return null;
 		}
 		
@@ -126,10 +127,10 @@ namespace AXSH2
 
             double d = Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2));// 两圆心距离
 
-            if (Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2)) < (r1 + r2))
-            {// 两圆相交
+           // if (Math.Sqrt(Math.Pow(x1 - x2, 2) + Math.Pow(y1 - y2, 2)) < (r1 + r2))
+           // {// 两圆相交
 
-            }
+            //}
 
             List<Coordinate> points = new List<Coordinate>();//交点坐标列表
 
@@ -149,20 +150,20 @@ namespace AXSH2
                 if (d == Math.Abs(r1 - r2) || d == r1 + r2)
                 {// 只有一个交点时
                     coor = new Coordinate();
-                    coor.setY(a);
-                    coor.setY(y1);
+                    coor.setY(Math.Abs(a/20));
+                    coor.setY(Math.Abs(y1/20));
                     points.Add(coor);
                 }
                 else
                 {// 两个交点
                     double t = r1 * r1 - (a - x1) * (a - x1);
                     coor = new Coordinate();
-                    coor.setX(a);
-                    coor.setY(y1 + Math.Sqrt(t));
+                    coor.setX(Math.Abs(a/20));
+                    coor.setY(Math.Abs((y1 + Math.Sqrt(t))/20));
                     points.Add(coor);
                     coor = new Coordinate();
-                    coor.setX(a);
-                    coor.setY(y1 - Math.Sqrt(t));
+                    coor.setX(Math.Abs(a/20));
+                    coor.setY(Math.Abs(y1 - Math.Sqrt(t))/20);
                     points.Add(coor);
                 }
             }
@@ -181,19 +182,19 @@ namespace AXSH2
                 if (d == Math.Abs(r1 - r2) || d == r1 + r2)
                 {
                     coor = new Coordinate();
-                    coor.setX((-b) / (2 * a));
-                    coor.setY(k * coor.getX() + disp);
+                    coor.setX(Math.Abs(((-b) / (2 * a))/20));
+                    coor.setY(Math.Abs((k * coor.getX() + disp)/20));
                     points.Add(coor);
                 }
                 else
                 {
                     coor = new Coordinate();
-                    coor.setX(((-b) + Math.Sqrt(disc)) / (2 * a));
-                    coor.setY(k * coor.getX() + disp);
+                    coor.setX(Math.Abs((((-b) + Math.Sqrt(disc)) / (2 * a))/20));
+                    coor.setY(Math.Abs((k * coor.getX() + disp)/20));
                     points.Add(coor);
                     coor = new Coordinate();
-                    coor.setX(((-b) - Math.Sqrt(disc)) / (2 * a));
-                    coor.setY(k * coor.getX() + disp);
+                    coor.setX(Math.Abs((((-b) - Math.Sqrt(disc)) / (2 * a))/20));
+                    coor.setY(Math.Abs((k * coor.getX() + disp)/20));
                     points.Add(coor);
                 }
             }

@@ -6,16 +6,26 @@
     <Grid Name="grad1" ShowGridLines="False" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="0,0,0,0.143">
         <Grid.RowDefinitions>
             <RowDefinition Height="0*"  />
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="45*"/>
             <RowDefinition Height="43*"/>
             <RowDefinition Height="33*"/>
@@ -32,37 +42,144 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="10*" />
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="45*"/>
-            <ColumnDefinition Width="45*"/>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="41*" />
-            <ColumnDefinition Width="49*"/>
-            <ColumnDefinition Width="45*" />
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="45*"/>
-            <ColumnDefinition Width="43*"/>
-            <ColumnDefinition Width="40*" />
-            <ColumnDefinition Width="37*"/>
-            <ColumnDefinition Width="206*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+
+            <ColumnDefinition Width="207*" />
             <ColumnDefinition Width="154*" />
         </Grid.ColumnDefinitions>
 
-        <Image Grid.ColumnSpan="19" Grid.RowSpan="25" Grid.Column="0" Grid.Row="0" Source="Resources/1.bmp" Stretch="Fill" Margin="0,-25,3.165,-0.286"  />
-        <Button Content="查询"  Background="White" Grid.Column="21" HorizontalAlignment="Left" Margin="10.336,10.143,0,0" Grid.Row="19" VerticalAlignment="Top" Width="80" Height="27" Click="Button_Find" Grid.RowSpan="4"/>
-        <Button Content="导出" Background="White" Grid.Column="19" HorizontalAlignment="Left" Margin="26.835,1.857,0,0" Grid.Row="20" VerticalAlignment="Top" Width="81" Height="27" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
-        <Button Content="启动" Background="White"  Grid.Column="20" HorizontalAlignment="Left" Margin="0.264,9.872,0,0" VerticalAlignment="Top" Width="71" Height="30" Click="Button_Start" Grid.Row="2" Grid.RowSpan="4"/>
-        <ListBox Name="listTags" Grid.ColumnSpan="2" Grid.Column="20" HorizontalAlignment="Left" Height="264" Margin="6.264,9.76,-6.05,0" Grid.RowSpan="10" VerticalAlignment="Top" Width="360" Grid.Row="8"/>
-        <Button Content="暂停" Background="White" Grid.Column="20" HorizontalAlignment="Left" Margin="146.264,9.872,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="buttonStop_Click" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="4"/>
-        <Button Content="清除" Background="White" Grid.Column="21" Margin="0,9.872,14.95,9.954" Click="buttonClear_Click" Grid.Row="2" HorizontalAlignment="Right" Width="69" Grid.RowSpan="5"/>
+        <Image Grid.ColumnSpan="123" Grid.RowSpan="35" Grid.Column="0" Grid.Row="0" Source="Resources/1.bmp" Stretch="Fill" Margin="4,-20,1.429,-2.073"  />
+        <Button Content="查询"  Background="White" Grid.Column="123" HorizontalAlignment="Left" Margin="194.571,2.678,0,0" Grid.Row="30" VerticalAlignment="Top" Width="80" Height="27" Click="Button_Find" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+        <Button Content="导出" Background="White" Grid.Column="123" HorizontalAlignment="Left" Margin="56.571,3.921,0,0" Grid.Row="30" VerticalAlignment="Top" Width="81" Height="27" Grid.RowSpan="4"/>
+        <Button Content="启动" Background="White"  Grid.Column="123" HorizontalAlignment="Left" Margin="146.571,0,0,0" VerticalAlignment="Top" Width="71" Height="30" Click="Button_Start" Grid.Row="8" Grid.RowSpan="6" Grid.ColumnSpan="2"/>
+        <ListBox Name="listTags" Grid.ColumnSpan="2" Grid.Column="123" HorizontalAlignment="Left" Height="236" Margin="17.571,1.188,0,0" Grid.RowSpan="9" VerticalAlignment="Top" Width="303" Grid.Row="17"/>
+        <Button Content="暂停" Background="White" Grid.Column="124" HorizontalAlignment="Left" Margin="59.714,4.143,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="buttonStop_Click" Grid.Row="7" Grid.RowSpan="7"/>
+        <Button Content="清除" Background="White" Grid.Column="123" Margin="0,1,89.286,2.684" Click="buttonClear_Click" Grid.Row="8" HorizontalAlignment="Right" Width="69" Grid.RowSpan="7"/>
 
     </Grid>
 </Window>
