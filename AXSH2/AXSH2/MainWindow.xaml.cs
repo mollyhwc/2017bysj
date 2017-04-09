@@ -22,6 +22,7 @@ namespace AXSH2
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
+    /// acording to the relationship of rssi and distance 
     public partial class MainWindow : Window
     {
 
@@ -69,11 +70,12 @@ namespace AXSH2
             {
                 ArrayList reader = new ArrayList();
                 reader.Add(roomNameList[i]);
-                reader.Add(i / 3);//(0,1,2)--0/(1,2,3)--1/(3,4,5)--2/(4,5,6)--3
+                reader.Add(i / 3);//(0,1,2)--0/(1,2,3)--1/(3,4,5)--2/(4,5,6)--3以此类推，实际上12个房间需要36个阅读器
                 readerList.Add(reader);
             }
 
             //initialize room[the roomId is from 1-12]
+            //1-7 行号2  餐厅这一排21 8-12 行号42
             for (int i = 1; i < 7; i++)
             {
                 ArrayList room = RoomOrAntennaInformationList(i, 2, 1 + (i - 1) * 20);
@@ -81,7 +83,7 @@ namespace AXSH2
             }
             for (int i = 7; i < 13; i++)
             {
-                ArrayList room = RoomOrAntennaInformationList(i, 35, (20 * (i - 7) + 1));
+                ArrayList room = RoomOrAntennaInformationList(i, 42, (20 * (i - 7) + 1));
                 roomList.Add(room);
             }
             //initialize antenna 
@@ -243,7 +245,8 @@ namespace AXSH2
             for (int j = 0; j < loopTime; j++)
             {
                 atennaNum = rnd.Next(1, 5);
-                while (tempList.Contains(atennaNum)) {
+                while (tempList.Contains(atennaNum))
+                {
                     atennaNum = rnd.Next(1, 5);
                 }
                 tempList.Add(atennaNum);
@@ -294,7 +297,7 @@ namespace AXSH2
                     }
                     int x = roomx + antennax;
                     int y = roomy + antennay;
-                    Round r = new Round( x * 20, y * 20, distance);
+                    Round r = new Round(x * 20, y * 20, distance);
                     round.Add(r);
 
                 }
@@ -372,45 +375,95 @@ namespace AXSH2
             // Loop through each tag is the list and add it to the Listbox.              
             foreach (var tag in list)
             {
-                listTags.Items.Add("老人" + tag.getId() + "在" + tag.getRoomId() + "号房间");
+                listTags.Items.Add("老人" + tag.getId() + "在" + tag.getRoomId() + "号房间坐标是（" + tag.getxpos() + "," + tag.getypos() + ")");
             }
         }
-        /* 
-            private void updateListbox(List<Tag> list)
+
+        private void updateListbox(List<Tag> list)
+        {
+            // Loop through each tag is the list and add it to the Listbox.   
+            int roomNumber;
+            int xpos = 0;
+            int ypos = 0;
+            foreach (var tag in list)
+            {
+
+                for (int i = 0; i < roomList.Count; i++)
                 {
-                    // Loop through each tag is the list and add it to the Listbox.              
-                    foreach (var tag in list)
+                    if (tag.ReaderIdentity.Equals(roomNameList[i][0]))
                     {
-                        listTags.Items.Add(tag.Epc + ", " + tag.AntennaPortNumber);     
+                        roomNumber = roomNameList[i][1];
                     }
                 }
-       
-                private void OnTagsReported(object sender, TagsReportedEventArgs args)
-                {         
-                    TagsReportedDelegate del = new TagsReportedDelegate(updateListbox);
-                    this.Dispatcher.BeginInvoke(del, args.TagReport.Tags);
-                    foreach (Tag tag in args.TagReport.Tags) {
-                        for (int i = 0; i < id.Length; i++) { 
-                        if(tag.Epc.Equals(id[i])){
-                            setRssi(i,tag.PeakRssiInDbm,tag.AntennaPortNumber,(String)tag.ReaderIdentity);
-                            double[,] pos = new double[2, 4];
+                for (int k = 0; k < array1.Count; k++)
+                {
+                    if (tag.Epc.Equals(array1[k].getId()))
+                    {
+                        xpos = array1[k].getxpos();
+                        xpos = array1[k].getypos();
+                    }
+                }
+                listTags.Items.Add("老人" + tag.Epc + "在" + roomNameList + "号房间坐标(" + xpos + "," + ypos + ")");
+            }
+        }
+
+        private void OnTagsReported(object sender, TagsReportedEventArgs args)
+        {
+            TagsReportedDelegate del = new TagsReportedDelegate(updateListbox);
+            this.Dispatcher.BeginInvoke(del, args.TagReport.Tags);
             
-                                for (int j = 1; j < array1[0].Count - 3; j++)
-                                {
-                                    pos[0, j-1] = (int)array1[i][j];
-                                    pos[1, j - 1] = j;
-                                }
-                                sortPosition(pos);
-                                double[] colRow=getColRow(pos);
-                                array1[i][6] =(int) colRow[0];
-                                array1[i][7] = (int)colRow[1];
-                    ((Image)Imagelist[i]).SetValue(Grid.RowProperty, (int)colRow[0] + (int)roomList[roomIndex][1]);
-                    ((Image)Imagelist[i]).SetValue(Grid.ColumnProperty, (int)colRow[1] + (int)roomList[roomIndex][2]);             
-                            }
-                        }
+            foreach (Tag tag in args.TagReport.Tags)
+            {
+                int index = 0;
+                int roomNumber = 1;
+                for (int i = 0; i < roomList.Count; i++)
+                {
+                    if (tag.ReaderIdentity.Equals(roomNameList[i][0]))
+                    {
+                        roomNumber = roomNameList[i][1];
                     }
                 }
-            */
+
+                //get the index of tag in array1
+                for (index = 0; index < array1.Count; index++)
+                {
+                    if (array1[index].getId().Equals(tag.Epc))
+                    {
+                        break;
+                    }
+                }
+                //modify rssi
+                if (GetTimeStamp().Equals(array1[index].getTime()))
+                {
+                    //if time stamp is eaqual
+                    int listNowCount = array1[index].getNumList();
+                    if (listNowCount < 3)
+                    {
+                        ArrayList rssiCondition = new ArrayList();
+                        rssiCondition.Add(tag.PeakRssiInDbm);
+                        rssiCondition.Add(tag.AntennaPortNumber);
+                        rssiCondition.Add(roomNumber);
+                        array1[index].addListElement(rssiCondition);
+                    }
+                }
+                else
+                {
+                    ArrayList rssiCondition = new ArrayList();
+                    rssiCondition.Add(tag.PeakRssiInDbm);
+                    rssiCondition.Add(tag.AntennaPortNumber);
+                    rssiCondition.Add(roomNumber);
+                    array1[index].addListElement(rssiCondition);
+                }
+
+                array1[index].setTime(GetTimeStamp());
+                int[] pos = calculatePos((PersonInformation)array1[index]);
+                if (pos[0] != -1 && pos[1] != -1)
+                {
+                    ((Image)Imagelist[index]).SetValue(Grid.RowProperty, pos[0]);
+                    ((Image)Imagelist[index]).SetValue(Grid.ColumnProperty, pos[1]);
+                }
+            }
+        }    
 
         //stop
         private void buttonStop_Click(object sender, RoutedEventArgs e)
@@ -473,79 +526,6 @@ namespace AXSH2
             Application.Current.Shutdown();
         }
 
-
-
-
-        //判断是在哪个区域
-        public double[] getColRow(double[,] pos)
-        {
-            double[] colRow = new double[2];//index0表示行，index1表示列
-            if (pos[1, 0] == 1 && pos[1, 1] == 2 || pos[1, 0] == 2 && pos[1, 1] == 1)
-            {
-                colRow[0] = 0;
-                colRow[1] = 0;
-            }
-            else if (pos[1, 0] == 2 && pos[1, 1] == 3 || pos[1, 0] == 3 && pos[1, 1] == 2)
-            {
-                colRow[0] = 0;
-                colRow[1] = 1;
-            }
-            else if (pos[1, 0] == 4 && pos[1, 1] == 1 || pos[1, 0] == 1 && pos[1, 1] == 4)
-            {
-                colRow[0] = 0;
-                colRow[1] = 0;
-            }
-            else if (pos[1, 0] == 3 && pos[1, 1] == 4 || pos[1, 0] == 4 && pos[1, 1] == 3)
-            {
-                colRow[0] = 1;
-                colRow[1] = 1;
-
-            }
-            else if (pos[1, 0] == 1 && pos[1, 1] > -40)
-            {
-                colRow[0] = 0;
-                colRow[1] = 0;
-            }
-            else if (pos[1, 0] == 2 && pos[1, 1] > -40)
-            {
-                colRow[0] = 0;
-                colRow[1] = 1;
-            }
-            else if (pos[1, 0] == 3 && pos[1, 1] > -40)
-            {
-                colRow[0] = 1;
-                colRow[1] = 1;
-            }
-            else if (pos[1, 0] == 4 && pos[1, 1] > -40)
-            {
-                colRow[0] = 1;
-                colRow[1] = 0;
-            }
-            return colRow;
-        }
-        //对获得的RSSI进行大小的排序
-        //二维数组 RSSI 在第一行 天线在第二行
-        public double[,] sortPosition(double[,] pos)
-        {
-            double temp = 0;
-            double tempTianxian = 0;
-            for (int i = 0; i < pos.GetLength(1) - 1; i++)
-            {
-                for (int j = i + 1; j < pos.GetLength(1); j++)
-                {
-                    if (pos[0, j] > pos[0, i])
-                    {
-                        temp = pos[0, i];
-                        pos[0, i] = pos[0, j];
-                        pos[0, j] = temp;
-                        tempTianxian = pos[1, i];
-                        pos[1, i] = pos[1, j];
-                        pos[1, j] = tempTianxian;
-                    }
-                }
-            }
-            return pos;
-        }
         //return array1;
         public List<PersonInformation> getArray()
         {

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections;
-
+using System.Data.OleDb;
 namespace AXSH
 {
     /// <summary>
@@ -24,7 +24,7 @@ namespace AXSH
         {
             InitializeComponent();
         }
-         private void Button_Search(object sender, RoutedEventArgs e)
+        private void Button_Search(object sender, RoutedEventArgs e)
         {
             bool isFind = false;
             String oldId = ID.Text;
@@ -32,11 +32,13 @@ namespace AXSH
             String area;
             for (int i = 0; i < array.Count; i++)
             {
-              if (oldId.Equals(array[i][0]))
+                if (oldId.Equals(array[i][0]))
                 {
-                    if ((int)array[i][6] == 0 && (int)array[i][7] == 0) {
+                    if ((int)array[i][6] == 0 && (int)array[i][7] == 0)
+                    {
                         area = "A";
-                    }else if ((int)array[i][6] == 0 && (int)array[i][7] == 1)
+                    }
+                    else if ((int)array[i][6] == 0 && (int)array[i][7] == 1)
                     {
                         area = "B";
                     }
@@ -44,11 +46,26 @@ namespace AXSH
                     {
                         area = "C";
                     }
-                    else 
+                    else
                         area = "D";
+
+                    string connStr = "provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\\Users\\黄小仙儿\\Documents\\Visual Studio 2012\\Projects\\AXSH\\AXSH\\Manager.accdb";
+                    OleDbConnection con;
+                    con = new OleDbConnection(connStr);
+                    string a = "select * from OldManInformation where ShenFenZheng='" + oldId + "' ";
+
+                    OleDbCommand cmd = new OleDbCommand(a, con);
+                    con.Open();
+                    OleDbDataReader rd = cmd.ExecuteReader();
+                    InqueryResult qinsult = new InqueryResult();
+                    if (rd.Read())
+                    {
+                        qinsult.setValue(rd["oldName"].ToString(), rd["Sex"].ToString(), rd["TelePhone"].ToString(), rd["HomeAddress"].ToString(), array[i][5].ToString (), rd["Age"].ToString(), area);
+                    
+                        isFind = true;
+                    }
+                    qinsult.Show();
                    
-                    MessageBox.Show("您好，编号" + array[i][0] + "的老人在" + ((int)array[i][5]).ToString() + "号房间"+ area + "区");
-                    isFind = true;
                     break;
                 }
             }
@@ -61,5 +78,5 @@ namespace AXSH
             this.Hide();
         }
     }
-    
+
 }

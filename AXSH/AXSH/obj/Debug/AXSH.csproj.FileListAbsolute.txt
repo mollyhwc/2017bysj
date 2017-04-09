@@ -18,3 +18,6 @@ C:\Users\黄小仙儿\documents\visual studio 2012\Projects\AXSH\AXSH\bin\Debug\
 C:\Users\黄小仙儿\documents\visual studio 2012\Projects\AXSH\AXSH\bin\Debug\Impinj.OctaneSdk.xml
 C:\Users\黄小仙儿\documents\visual studio 2012\Projects\AXSH\AXSH\obj\Debug\InqueryPage.baml
 C:\Users\黄小仙儿\documents\visual studio 2012\Projects\AXSH\AXSH\obj\Debug\InqueryPage.g.cs
+C:\Users\黄小仙儿\Documents\Visual Studio 2012\Projects\AXSH\AXSH\obj\Debug\AXSH.csprojResolveAssemblyReference.cache
+C:\Users\黄小仙儿\Documents\Visual Studio 2012\Projects\AXSH\AXSH\obj\Debug\InqueryResult.baml
+C:\Users\黄小仙儿\Documents\Visual Studio 2012\Projects\AXSH\AXSH\obj\Debug\InqueryResult.g.cs

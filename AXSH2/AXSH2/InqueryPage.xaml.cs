@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections;
+using System.Data.OleDb;
 
 namespace AXSH2
 {
@@ -28,34 +29,35 @@ namespace AXSH2
         {
             bool isFind = false;
             String oldId = ID.Text;
-            String area;
             MainWindow m = new MainWindow();
             List<PersonInformation> array = m.getArray();
-            /*
+
             for (int i = 0; i < array.Count; i++)
             {
-                if (oldId.Equals(array[i][0]))
+                if(oldId .Equals (array [i].getId ()))
                 {
-                    if ((int)array[i][6] == 0 && (int)array[i][7] == 0) {
-                        area = "A";
-                    }else if ((int)array[i][6] == 0 && (int)array[i][7] == 1)
+                    string connStr = "provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\\Users\\黄小仙儿\\Documents\\Visual Studio 2012\\Projects\\AXSH2\\AXSH2\\Manager.accdb";
+                    OleDbConnection con;
+                    con = new OleDbConnection(connStr);
+                    string a = "select * from OldManInformation where ShenFenZheng='" + oldId + "' ";
+                    OleDbCommand cmd = new OleDbCommand(a, con);
+                    con.Open();
+                    OleDbDataReader rd = cmd.ExecuteReader();
+                    inqueryResult qinsult = new inqueryResult();
+                    if (rd.Read())
                     {
-                        area = "B";
+                        String pos="x:"+array [i].getxpos()+" ,y:"+array[i].getypos();
+                        qinsult.setValue(rd["oldName"].ToString(), rd["Sex"].ToString(), rd["TelePhone"].ToString(), rd["HomeAddress"].ToString(), array[i].getRoomId().ToString(), rd["Age"].ToString(), pos);
+                        isFind = true;
                     }
-                    else if ((int)array[i][6] == 1 && (int)array[i][7] == 0)
-                    {
-                        area = "C";
-                    }
-                    else 
-                        area = "D";
-                   
-                    MessageBox.Show("您好，编号" + array[i][0] + "的老人在" + ((int)array[i][5]).ToString() + "号房间" + area + "区");
-                    isFind = true;
+                    qinsult.Show();
+
                     break;
                 }
             }
+            
             if (!isFind) { MessageBox.Show("抱歉，没有找到相关的信息"); }
-            */
+            
         }
 
         private void Button_Exit(object sender, RoutedEventArgs e)

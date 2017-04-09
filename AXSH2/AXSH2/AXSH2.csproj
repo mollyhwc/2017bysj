@@ -65,11 +65,18 @@
     </ApplicationDefinition>
     <Compile Include="Centroid.cs" />
     <Compile Include="Coordinate.cs" />
+    <Compile Include="inqueryResult.xaml.cs">
+      <DependentUpon>inqueryResult.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PersonInformation.cs" />
     <Compile Include="Round.cs" />
     <Page Include="InqueryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="inqueryResult.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="login.xaml">
       <SubType>Designer</SubType>

@@ -14,7 +14,8 @@ namespace AXSH3
         private List<double> rssiList;
         private List<double> distinctList;
         private List<double> weight;
-        private String roomNumber;
+        private int roomNumber;
+        public string readerName;
         public double getX()
         {
             return x;
@@ -37,23 +38,31 @@ namespace AXSH3
             this.y = y;
             this.id = id;
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 5; i++)
             {
                 rssiList.Add(0); //the initialize of 8 readers
                 distinctList.Add(0);  //inilize the distinctList
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 8; i++)
             {
                 weight.Add(1);
             }
         }
-        public void setRoomNumber(String roomNumber)
+        public void setRoomNumber(int roomNumber)
         {
             this.roomNumber = roomNumber;
         }
-        public String getRoomNumber()
+        public int getRoomNumber()
         {
             return roomNumber;
+        }
+        public void setReaderName(String readerName)
+        {
+            this.readerName = readerName;
+        }
+        public String  getReaderName()
+        {
+            return readerName;
         }
         public void setTagrssi(double rssi, int AntennaPortNumber)
         {

@@ -57,13 +57,24 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit">
+      <HintPath>B:\pangpang\bysj\example wpf\Chart Control in WPF\C#\WpfChartControl\bin\WPFToolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="chart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="InqueryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InqueryResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -79,8 +90,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="chart.xaml.cs">
+      <DependentUpon>chart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InqueryPage.xaml.cs">
       <DependentUpon>InqueryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InqueryResult.xaml.cs">
+      <DependentUpon>InqueryResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>

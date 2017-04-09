@@ -63,7 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PersonInformation.cs" />
+    <Compile Include="Room.cs" />
     <Compile Include="Tags.cs" />
     <Page Include="InqueryPage.xaml">
       <SubType>Designer</SubType>

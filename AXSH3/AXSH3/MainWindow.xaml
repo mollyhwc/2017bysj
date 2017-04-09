@@ -6,43 +6,46 @@
     <Grid Name="grad1" ShowGridLines="False" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Margin="0,0,0,0.143">
         <Grid.RowDefinitions>
             <RowDefinition Height="0*"  />
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="35*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="43*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="49*"/>
             <RowDefinition Height="42*"/>
+            <RowDefinition Height="41*"/>
             <RowDefinition Height="30*" />
             <RowDefinition Height="45*"/>
-            <RowDefinition Height="40*" />
-            <RowDefinition Height="38*"/>
+            <RowDefinition Height="20*" />
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition Height="49*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="46*" />
-            <ColumnDefinition Width="44*"/>
+            <ColumnDefinition Width="45*" />
+            <ColumnDefinition Width="45*"/>
             <ColumnDefinition Width="45*"/>
             <ColumnDefinition Width="45*"/>
             <ColumnDefinition Width="39*"/>
             <ColumnDefinition Width="41*" />
-            <ColumnDefinition Width="49*"/>
-            <ColumnDefinition Width="45*" />
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="48*"/>
+            <ColumnDefinition Width="47*" />
+            <ColumnDefinition Width="42*"/>
+            <ColumnDefinition Width="43*"/>
             <ColumnDefinition Width="42*"/>
             <ColumnDefinition Width="40*" />
-            <ColumnDefinition Width="37*"/>
+            <ColumnDefinition Width="35*"/>
             <ColumnDefinition Width="206*" />
             <ColumnDefinition Width="154*" />
         </Grid.ColumnDefinitions>
 
-        <Image Grid.ColumnSpan="12" Grid.RowSpan="12" Grid.Column="0" Grid.Row="0" Source="Resources/1.bmp" Stretch="Fill" Margin="0,-27,3.286,48.714"  />
-        <Button Content="查询"  Background="White" Grid.Column="14" HorizontalAlignment="Left" Margin="14.857,10.429,0,0" Grid.Row="11" VerticalAlignment="Top" Width="80" Height="27" Click="Button_Find"/>
-        <Button Content="导出" Background="White" Grid.Column="13" HorizontalAlignment="Left" Margin="0.143,10.429,0,0" Grid.Row="11" VerticalAlignment="Top" Width="81" Height="27"/>
-        <Button Content="启动" Background="White"  Grid.Column="13" HorizontalAlignment="Left" Margin="0.143,0,0,0" VerticalAlignment="Top" Width="71" Height="30" Click="Button_Start" Grid.Row="2"/>
-        <ListBox Name="listTags" Grid.ColumnSpan="2" Grid.Column="13" HorizontalAlignment="Left" Height="264" Margin="6.143,19.714,-5.571,0" Grid.RowSpan="7" VerticalAlignment="Top" Width="360" Grid.Row="3"/>
-        <Button Content="暂停" Background="White" Grid.Column="13" HorizontalAlignment="Left" Margin="146.143,0,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="buttonStop_Click" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <Button Content="清除" Background="White" Grid.Column="14" Margin="0,0,15.429,0.286" Click="buttonClear_Click" Grid.Row="2" HorizontalAlignment="Right" Width="69"/>
+        <Image Grid.ColumnSpan="12" Grid.RowSpan="15" Grid.Column="0" Grid.Row="0" Source="Resources/1.bmp" Stretch="Fill" Margin="0,-27,3,47.86"  />
+        <Button Content="查询"  Background="White" Grid.Column="14" HorizontalAlignment="Left" Margin="14.857,9.107,0,0" Grid.Row="14" VerticalAlignment="Top" Width="80" Height="27" Click="Button_Find"/>
+        <Button Content="导出" Background="White" Grid.Column="13" HorizontalAlignment="Left" Margin="0.143,9.107,0,0" Grid.Row="14" VerticalAlignment="Top" Width="81" Height="27"/>
+        <Button Content="启动" Background="White"  Grid.Column="13" HorizontalAlignment="Left" Margin="0.143,19.857,0,0" VerticalAlignment="Top" Width="71" Height="30" Click="Button_Start" Grid.Row="2" Grid.RowSpan="3"/>
+        <ListBox Name="listTags" Grid.ColumnSpan="2" Grid.Column="13" HorizontalAlignment="Left" Height="264" Margin="6.143,2.586,-5.571,0" Grid.RowSpan="8" VerticalAlignment="Top" Width="360" Grid.Row="5"/>
+        <Button Content="暂停" Background="White" Grid.Column="13" HorizontalAlignment="Left" Margin="146.143,19.857,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="buttonStop_Click" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+        <Button Content="清除" Background="White" Grid.Column="14" Margin="0,19.857,15.429,0.414" Click="buttonClear_Click" Grid.Row="2" HorizontalAlignment="Right" Width="69" Grid.RowSpan="3"/>
 
     </Grid>
 </Window>
