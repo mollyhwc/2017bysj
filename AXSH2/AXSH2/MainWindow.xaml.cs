@@ -38,7 +38,11 @@ namespace AXSH2
         int[] antennaX = { 0, 0, 0, 9, 9, 9, 19, 19, 19 };
         int[] antennaY = { 0, 9, 19, 0, 9, 19, 0, 9, 19 };
         DispatcherTimer timer = new DispatcherTimer();
-
+        //calculate the number of person:four places
+        //cantenne:1 danceroom:2 tabletennisroom:3 cardroom:4 else :0
+        //initialize all to 0
+        static int[] nowPos = new int[5];
+        static int[] calpos = new int[5];
         // Create an instance of the SpeedwayReader class.  
         private SpeedwayReader Reader = new SpeedwayReader();
 
@@ -257,6 +261,27 @@ namespace AXSH2
                 rssiCondition.Add(atennaNum);
                 rssiCondition.Add(roomId);
                 array1[index].addListElement(rssiCondition);
+
+                if (roomId  == 1)
+                {
+                    nowPos[index] = 1;
+                }
+                else if (roomId  == 2)
+                {
+                    nowPos[index] = 2;
+                }
+                else if (roomId  == 3)
+                {
+                    nowPos[index] = 3;
+                }
+                else if (roomId  == 4)
+                {
+                    nowPos[index] = 4;
+                }
+                else
+                {
+                    nowPos[index] = 0;
+                }
             }
         }
 
@@ -420,10 +445,10 @@ namespace AXSH2
                 {
                     if (tag.ReaderIdentity.Equals(roomNameList[i][0]))
                     {
-                        roomNumber = roomNameList[i][1];
+                        roomNumber = (int)roomList [i][1];
                     }
                 }
-
+               
                 //get the index of tag in array1
                 for (index = 0; index < array1.Count; index++)
                 {
@@ -431,6 +456,26 @@ namespace AXSH2
                     {
                         break;
                     }
+                }
+                if (roomNumber == 1)
+                {
+                    nowPos[index] = 1;
+                }
+                else if (roomNumber == 2)
+                {
+                    nowPos[index] = 2;
+                }
+                else if (roomNumber == 3)
+                {
+                    nowPos[index] = 3;
+                }
+                else if (roomNumber == 4)
+                {
+                    nowPos[index] = 4;
+                }
+                else
+                {
+                    nowPos[index] = 0;
                 }
                 //modify rssi
                 if (GetTimeStamp().Equals(array1[index].getTime()))
@@ -444,6 +489,7 @@ namespace AXSH2
                         rssiCondition.Add(tag.AntennaPortNumber);
                         rssiCondition.Add(roomNumber);
                         array1[index].addListElement(rssiCondition);
+
                     }
                 }
                 else
@@ -530,6 +576,47 @@ namespace AXSH2
         public List<PersonInformation> getArray()
         {
             return array1;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            chart c = new chart();
+            c.Show();
+        }
+        public static int[] calposition()
+        {
+            calpos[0] = 0;
+            calpos[1] = 0;
+            calpos[2] = 0;
+            calpos[3] = 0;
+            calpos[4] = 0;
+
+
+            for (int i = 0; i < nowPos.Length; i++)
+            {
+                if (nowPos[i] == 1)
+                {
+                    calpos[0]++;
+                }
+                else if (nowPos[i] == 2)
+                {
+                    calpos[1]++;
+                }
+                else if (nowPos[i] == 3)
+                {
+                    calpos[2]++;
+                }
+                else if (nowPos[i] == 4)
+                {
+                    calpos[3]++;
+                }
+                else
+                {
+                    calpos[4]++;
+                }
+
+            }
+            return calpos;
         }
     }
 }

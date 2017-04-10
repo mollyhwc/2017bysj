@@ -196,7 +196,7 @@
 
         <Image Grid.ColumnSpan="123" Grid.RowSpan="55" Grid.Column="0" Grid.Row="0" Source="Resources/1.bmp" Stretch="Fill" Margin="4,-20,1.429,-2.15"  />
         <Button Content="查询"  Background="White" Grid.Column="123" HorizontalAlignment="Left" Margin="194.571,1.58,0,-10.15" Grid.Row="52" VerticalAlignment="Top" Width="80" Height="27" Click="Button_Find" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
-        <Button Content="导出" Background="White" Grid.Column="123" HorizontalAlignment="Left" Margin="56.571,2.58,0,-11.15" Grid.Row="52" VerticalAlignment="Top" Width="81" Height="27" Grid.RowSpan="3"/>
+        <Button Content="导出" Background="White" Grid.Column="123" HorizontalAlignment="Left" Margin="56.571,2.714,0,-10.286" Grid.Row="52" Width="81" Grid.RowSpan="3" Click="Button_Click_1"/>
         <Button Content="启动" Background="White"  Grid.Column="123" HorizontalAlignment="Left" Margin="146.571,2,0,0" VerticalAlignment="Top" Width="71" Height="30" Click="Button_Start" Grid.Row="8" Grid.RowSpan="6" Grid.ColumnSpan="2"/>
         <ListBox Name="listTags" Grid.ColumnSpan="2" Grid.Column="123" HorizontalAlignment="Left" Height="236" Margin="17.571,2.429,0,0" Grid.RowSpan="25" VerticalAlignment="Top" Width="303" Grid.Row="17"/>
         <Button Content="暂停" Background="White" Grid.Column="124" HorizontalAlignment="Left" Margin="59.714,4.286,0,0" VerticalAlignment="Top" Width="70" Height="30" Click="buttonStop_Click" Grid.Row="7" Grid.RowSpan="6"/>

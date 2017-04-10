@@ -14,12 +14,27 @@ namespace AXSH3
         int number;
         String reader1;
         String reader2;
-
+        List<Tags> t = new List<Tags>();
         public Room(int number,double x,double y) {
             this.number = number;
             this.x = x;
             this.y = y;
         }
+        public List<Tags> getTagList() {
+            return t;
+        }
+        public void addTag(Tags tag) {
+            t.Add(tag);
+        }
+        public void setTag(string id,double rssi,int antenna) {
+            foreach (Tags tag in t) 
+            {
+                if (id.Equals(tag.getId())) {
+                    tag.setTagrssi(rssi,antenna);
+                }
+            }
+        }
+        
         public double getX() {
             return x;
         }

@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AXSH2", "..\AXSH2\AXSH2\AXS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AXSH", "AXSH\AXSH.csproj", "{F2B377C3-B56E-4DE2-8057-C4C8E4217941}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AXSH3", "..\AXSH3\AXSH3\AXSH3.csproj", "{61907B32-ACB9-4553-90A7-980613E692FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{F2B377C3-B56E-4DE2-8057-C4C8E4217941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2B377C3-B56E-4DE2-8057-C4C8E4217941}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2B377C3-B56E-4DE2-8057-C4C8E4217941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61907B32-ACB9-4553-90A7-980613E692FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61907B32-ACB9-4553-90A7-980613E692FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61907B32-ACB9-4553-90A7-980613E692FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61907B32-ACB9-4553-90A7-980613E692FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

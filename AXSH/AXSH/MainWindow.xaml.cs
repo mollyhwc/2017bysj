@@ -33,7 +33,11 @@ namespace AXSH
         public static List<ArrayList> array1 = new List<ArrayList>();
         string[] id = { "2222", "3333", "4444", "5555", "6666" };
         DispatcherTimer timer = new DispatcherTimer();
-
+        //calculate the number of person:four places
+        //cantenne:1 danceroom:2 tabletennisroom:3 cardroom:4 else :0
+        //initialize all to 0
+       static  int[] nowPos = new int[5];
+       static  int[] calpos = new int[5];
         // Create an instance of the SpeedwayReader class.  
         private SpeedwayReader Reader = new SpeedwayReader();
 
@@ -175,7 +179,29 @@ namespace AXSH
                 if (id[rnd.Next(0, 5)].Equals(id[i]))
                 {
                     int roomIndex = rnd.Next(0, 12);
+                    if (roomIndex == 1) 
+                    {
+                        nowPos[i] = 1;
+                    }
+                    else if(roomIndex ==2)
+                    {
+                        nowPos[i] = 2;
+                    }
+                    else if (roomIndex == 3)
+                    {
+                        nowPos[i] = 3;
+                    }
+                    else if (roomIndex == 4)
+                    {
+                        nowPos[i] = 4;
+                    }
+                    else
+                    {
+                        nowPos[i] = 0;
+                    }
+
                     setRssi(i, rnd.NextDouble() * (-25) - 35, rnd.Next(1, 5), (String)roomList[roomIndex][0]);
+                 //   if()
                     double[,] pos = new double[2, 4];
                     for (int j = 1; j < array1[0].Count - 3; j++)
                     {
@@ -257,11 +283,12 @@ namespace AXSH
         {
             // Loop through each tag is the list and add it to the Listbox.              
             foreach (var tag in list)
-            {
-                listTags.Items.Add("老人" + tag[0] + "在" + tag[5] + "号房间");
+            {   
+                if((int)tag[5]!=0)
+                { listTags.Items.Add("老人" + tag[0] + "在" + tag[5] + "号房间");}
             }
         }
-        /* 
+        /**
             private void updateListbox(List<Tag> list)
                 {
                     // Loop through each tag is the list and add it to the Listbox.              
@@ -277,7 +304,37 @@ namespace AXSH
                     this.Dispatcher.BeginInvoke(del, args.TagReport.Tags);
                     foreach (Tag tag in args.TagReport.Tags) {
                         for (int i = 0; i < id.Length; i++) { 
-                        if(tag.Epc.Equals(id[i])){
+                        if(tag.Epc.Equals(id[i]))
+                        {
+                            int roomIndex=0;
+                             for (int k = 0; k < roomList.Count; k++)
+                             {
+                                 if (tag.ReaderIdentity.Equals(roomList[k][0]))
+                                 {
+                                     roomIndex = i + 1;
+                                     break;
+                                 }
+                             }
+                            if (roomIndex == 1) 
+                            {
+                                nowPos[i] = 1;
+                            }
+                            else if(roomIndex ==2)
+                            {
+                                nowPos[i] = 2;
+                            }
+                            else if (roomIndex == 3)
+                            {
+                                nowPos[i] = 3;
+                            }
+                            else if (roomIndex == 4)
+                            {
+                                nowPos[i] = 4;
+                            }
+                            else
+                            {
+                                nowPos[i] = 0;
+                            }
                             setRssi(i,tag.PeakRssiInDbm,tag.AntennaPortNumber,(String)tag.ReaderIdentity);
                             double[,] pos = new double[2, 4];
             
@@ -296,8 +353,8 @@ namespace AXSH
                         }
                     }
                 }
-            */
-
+           
+        **/
         //stop
         private void buttonStop_Click(object sender, RoutedEventArgs e)
         {
@@ -457,6 +514,43 @@ namespace AXSH
                 }
             }
             return pos;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            chart c = new chart();
+            c.Show();
+        }
+        public static  int[]  calposition()
+        {
+            calpos[0] = 0;
+            calpos[1] = 0;
+            calpos[2] = 0;
+            calpos[3] = 0;
+            calpos[4] = 0;
+            for (int i = 0; i < nowPos.Length; i++)
+            {
+                if (nowPos[i] == 1)
+                {
+                    calpos[0]++;
+                }
+                else if (nowPos[i] == 2)
+                {
+                    calpos[1]++;
+                }
+                else if (nowPos[i] == 3) {
+                    calpos[2]++;
+                }
+                else if (nowPos[i] == 4)
+                {
+                    calpos[3]++;
+                }
+                else {
+                    calpos[4]++;
+                }
+              
+            }
+            return calpos;
         }
     }
 }

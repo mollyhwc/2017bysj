@@ -1,44 +1,28 @@
 ﻿<Window x:Class="AXSH.chart"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit" 
-    xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
-    Title="chart" Height="300" Width="300">
-    <Grid>
-        <chartingToolkit:Chart Height="262" HorizontalAlignment="Left" 
-            Margin="33,0,0,620" Name="ColumnChart1" Title="Department"
-            VerticalAlignment="Bottom" Width="410">
-            <chartingToolkit:ColumnSeries DependentValuePath="Value"  IndependentValuePath="Key" ItemsSource="{Binding}"
-            IsSelectionEnabled="True"></chartingToolkit:ColumnSeries>
-        </chartingToolkit:Chart>
-        <chartingToolkit:Chart  Name="AreaChart1" Title="Department" Margin="828,39,0,629" HorizontalAlignment="Left" Width="378">
-            <chartingToolkit:AreaSeries DependentValuePath="Value"
-          IndependentValuePath="Key" ItemsSource="{Binding}"
-            IsSelectionEnabled="True"/>
-        </chartingToolkit:Chart>
-        <chartingToolkit:Chart  Name="BarChart1" Title="Department" Margin="547,307,19,358" Width="450">
-            <chartingToolkit:BarSeries  DependentValuePath="Value"
-            IndependentValuePath="Key" ItemsSource="{Binding}"
-            IsSelectionEnabled="True"/>
-        </chartingToolkit:Chart>
-        <chartingToolkit:Chart  Name="PieChart1" Title="Department" Width="380"
-            VerticalAlignment="Top" Margin="428,39,0,0" Height="262" HorizontalAlignment="Left">
-            <chartingToolkit:PieSeries DependentValuePath="Value"
-            IndependentValuePath="Key" ItemsSource="{Binding}"
-            IsSelectionEnabled="True" />
-        </chartingToolkit:Chart>
-        <chartingToolkit:Chart  Name="LineChart1" Title="Department" Width="450" Margin="33,309,533,358">
-            <chartingToolkit:LineSeries  DependentValuePath="Value"
-            IndependentValuePath="Key" ItemsSource="{Binding}"
-            IsSelectionEnabled="True"/>
-        </chartingToolkit:Chart>
-        <chartingToolkit:Chart Name="BubbleSeries1" Title="Department" Width="420" Height="300" Margin="573,570,302,51">
-            <chartingToolkit:BubbleSeries IndependentValuePath="Key" DependentValuePath="Value" IsSelectionEnabled="True" ItemsSource="{Binding}"></chartingToolkit:BubbleSeries>
-        </chartingToolkit:Chart>
-        <chartingToolkit:Chart Name="ScatterSeries1" Title="Department" Width="420" Height="300" Margin="138,570,737,51">
-            <chartingToolkit:ScatterSeries IndependentValuePath="Key" DependentValuePath="Value" IsSelectionEnabled="True" ItemsSource="{Binding}"></chartingToolkit:ScatterSeries>
-        </chartingToolkit:Chart>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="290,616,0,0" VerticalAlignment="Top"/>
+        Title="chart" WindowStartupLocation="CenterScreen" Height="500" Width="900" xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit">
+   
+        <Grid Height="954" Width="879" >
+            <chartingToolkit:Chart Height="312" HorizontalAlignment="Left" Margin="37,0,0,599" Name="columnChart" Title="人数统计柱状图" VerticalAlignment="Bottom" Width="377">
+                <chartingToolkit:ColumnSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" />
+            </chartingToolkit:Chart>
+            <chartingToolkit:Chart  Name="pieChart" Title="人数统计饼图" VerticalAlignment="Top" Margin="449,43,29,0" Height="312">
+                <chartingToolkit:PieSeries DependentValuePath="Value" IndependentValuePath="Key" ItemsSource="{Binding}" IsSelectionEnabled="True" Margin="10,10,15.429,24.143" RenderTransformOrigin="0.5,0.5" >
+                    <chartingToolkit:PieSeries.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-0.111"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </chartingToolkit:PieSeries.RenderTransform>
+                </chartingToolkit:PieSeries>
+            </chartingToolkit:Chart>
+        <Button Background="AliceBlue" Content="返回" HorizontalAlignment="Left" Margin="365,395,0,0" VerticalAlignment="Top" Width="140" Height="35" Click="Button_Click_1"/>
+
 
     </Grid>
+ 
+
 </Window>

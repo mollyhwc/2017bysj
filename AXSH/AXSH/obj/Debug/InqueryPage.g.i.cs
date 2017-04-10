@@ -9,14 +9,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Microsoft.Windows.Controls;
-using Microsoft.Windows.Controls.Primitives;
 using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Controls;
-using System.Windows.Controls.DataVisualization.Charting;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;

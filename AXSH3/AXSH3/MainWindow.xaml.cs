@@ -37,15 +37,17 @@ namespace AXSH3
         List<Room> roomList = new List<Room>();
         List<Tags> untrackTagList = new List<Tags>();
         List<Tags> referenceTagList = new List<Tags>();
-        List<List> allReferenceTag = new List<List>();
         List<String> referenceTagId = new List<string>();
         ArrayList atennuList = new ArrayList();
         List<ArrayList> sortTemp = new List<ArrayList>();
         double[] referenceTagX = { 1, 2, 3, 1, 3, 1, 2, 3 };
         double[] referenceTagY = { 1, 1, 1, 2, 2, 3, 3, 3 };
-    
         string[] id = { "2222", "3333", "4444", "5555", "6666" };
-
+        //calculate the number of person:four places
+        //cantenne:1 danceroom:2 tabletennisroom:3 cardroom:4 else :0
+        //initialize all to 0
+        static int[] nowPos = new int[5];
+        static int[] calpos = new int[5];
         DispatcherTimer timer = new DispatcherTimer();
 
         // Create an instance of the SpeedwayReader class.  
@@ -92,6 +94,13 @@ namespace AXSH3
                 r.setReader1(roomNameList[2 * i - 2]);
                 r.setReader2(roomNameList[2 * i - 1]);
                 roomList.Add(r);
+                //add reference tag to each room
+                for (int m = 0; m < 8; m++) 
+                {         
+                    Tags tag = new Tags(referenceTagX[i], referenceTagY[i], referenceTagId[i]);
+                    tag.setRoomNumber(m + 1);              
+                    r.addTag(tag);
+                }
             }
             for (int i = 7; i < 13; i++)
             {
@@ -99,6 +108,12 @@ namespace AXSH3
                 r.setReader1(roomNameList[2 * i - 2]);
                 r.setReader2(roomNameList[2 * i - 1]);
                 roomList.Add(r);
+                for (int m = 0; m < 8; m++)
+                {
+                    Tags tag = new Tags(referenceTagX[i], referenceTagY[i], referenceTagId[i]);
+                    tag.setRoomNumber(m + 1);                 
+                    r.addTag(tag);
+                }
             }
             /**
             //假设将24个阅读器全部加入到里面
@@ -181,6 +196,7 @@ namespace AXSH3
             referenceTagId.Add("8888-8888-8888");
 
             //intilize reference tags' information
+            //12room and each room has 8 reference tags
             for (int m = 0; m < 12; m++)
             {
                 for (int i = 0; i < 8; i++)
@@ -204,7 +220,7 @@ namespace AXSH3
         void changePosition(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            //unrack tag
+            //untrack tag
             for (int i = 0; i < id.Length; i++)
             {
                 if (id[rnd.Next(0, 5)].Equals(id[i]))
@@ -217,27 +233,64 @@ namespace AXSH3
                         untrackTagList[i].setTagrssi(rssiRandom, antennaPortNumber);
                     } 
                     string readerIdentity = roomNameList[rnd.Next(0, 25)];
+                    int roomIndex=0;
                      for (int p = 0; p < roomList.Count; p++)
                      {
                          if ((roomList[p].getReader1()).Equals(readerIdentity) || (roomList[p].getReader2()).Equals(readerIdentity))
                          {
                              untrackTagList[i].setRoomNumber(roomList[p].getRoomNumber());
+                             roomIndex = roomList[p].getRoomNumber();
                          }
+                     }
+                     if (roomIndex == 1)
+                     {
+                         nowPos[i] = 1;
+                     }
+                     else if (roomIndex == 2)
+                     {
+                         nowPos[i] = 2;
+                     }
+                     else if (roomIndex == 3)
+                     {
+                         nowPos[i] = 3;
+                     }
+                     else if (roomIndex == 4)
+                     {
+                         nowPos[i] = 4;
+                     }
+                     else
+                     {
+                         nowPos[i] = 0;
                      }
                 }
             }
-            //reference tag
-                for(int k=0;k<referenceTagId.Count ;k++)
+            //reference tag binded in each room
+            int roomNumber = 1;
+            for (int k = 0; k < referenceTagId.Count; k++)
+            {
+                
+                if (referenceTagId[rnd.Next(0, 9)].Equals(referenceTagId[k]))
                 {
-                     if(referenceTagId[rnd.Next (0,9)].Equals(referenceTagId[k]))
-                     {
-                         double referenceRssi=rnd .NextDouble()*(-25)-35;
-                         int referencecAntennaport=rnd.Next(0,5);
-                         referenceTagList[k].setTagrssi(referenceRssi ,referencecAntennaport );           
-                     }
+                    double referenceRssi = rnd.NextDouble() * (-25) - 35;
+                    int referencecAntennaport = rnd.Next(0, 5);
+                   
+                    //遍历每一个房间，判断这个天线是不是在这个房间中
+                    for (int i = 0; i < roomList.Count; i++)
+                    {
+                        for (int m = 0; m < roomList[i].getTagList().Count; m++)
+                        {
+                            if (roomList[i].getTagList()[m].getId().Equals(referenceTagId[rnd.Next(0, 9)]))
+                            {
+                                roomNumber = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    roomList[roomNumber - 1].setTag(referenceTagId[rnd.Next(0, 9)], referenceRssi, referencecAntennaport);
                 }
-                  
-                calGetXandY(untrackTagList, referenceTagList);
+            }
+                calGetXandY(untrackTagList, roomList[roomNumber-1].getTagList());
                 //the count of untracktag is the same as imagelist number 
                //but the number of image havenot make well
                 for (int i = 0; i < Imagelist .Count ; i++)
@@ -298,43 +351,61 @@ namespace AXSH3
             // Loop through each tag is the list and add it to the Listbox.              
             foreach (var tag in list)
             {
-                for (int i = 0; i < roomNameList.Count ;i++ )
-                {
-                    if (tag.ReaderIdentity.Equals(roomNameList[i]))
-                    {
-                        if (i % 2 == 0) { i = (i + 2) % 2; }
-                        else i = (i + 1) % 2; 
-                        listTags.Items.Add("老人" + tag.Epc + "在 " +i+"号房间");
-                    }
-                }
+                 listTags.Items.Add("老人" + tag.getId() + "在" + tag.getRoomNumber() + "号房间" + "x:" + tag.getX() + "y:" + tag.getY());            
             }
         }
         **/
-        /**
+
         public  void OnTagsReported(object sender, TagsReportedEventArgs args)
         {
             TagsReportedDelegate del = new TagsReportedDelegate(updateListbox);
             this.Dispatcher.BeginInvoke(del, args.TagReport.Tags);
             foreach (Tag tag in args.TagReport.Tags)
             {
+
                 for (int i = 0; i < untrackTagList.Count; i++)
                 {
                     if (tag.Epc.Equals(untrackTagList[i].getId()))
                     {
+                        int roomIndex=0;
                         untrackTagList[i].setTagrssi(tag.PeakRssiInDbm, tag.AntennaPortNumber);
                         for(int p=0;p<roomList.Count;p++){
                         if((roomList[p].getReader1()).Equals(tag.ReaderIdentity )||(roomList[p].getReader2()).Equals(tag.ReaderIdentity )){
                         untrackTagList [i].setRoomNumber(roomList[p].getRoomNumber());
+                        roomIndex = roomList[p].getRoomNumber();
+                        }
+                        if (roomIndex == 1)
+                        {
+                            nowPos[i] = 1;
+                        }
+                        else if (roomIndex == 2)
+                        {
+                            nowPos[i] = 2;
+                        }
+                        else if (roomIndex == 3)
+                        {
+                            nowPos[i] = 3;
+                        }
+                        else if (roomIndex == 4)
+                        {
+                            nowPos[i] = 4;
+                        }
+                        else
+                        {
+                            nowPos[i] = 0;
                         }
                         }
                        
                     }
                 }
-                for (int j = 0; j < referenceTagList.Count; j++)
+                for (int j = 0; j < roomList.Count; j++)
                 {
-                    if (tag.Epc.Equals(referenceTagList[j].getId()))
+                    for (int k = 0; k < roomList[j].getTagList().Count; k++)
                     {
-                        referenceTagList[j].setTagrssi(tag.PeakRssiInDbm, tag.AntennaPortNumber);
+                        if (tag.Epc.Equals(roomList[j].getTagList()[k].getId()))
+                        {
+                            roomList[k].setTag(referenceTagId[j ], tag.PeakRssiInDbm, tag.AntennaPortNumber);       
+                        }
                     }
                 }
             }
@@ -345,7 +416,6 @@ namespace AXSH3
                 ((Image)Imagelist[i]).SetValue(Grid.ColumnProperty, 3-(int)(untrackTagList[i].getY()) +roomList[i].getY());
             }
         }
-        **/
         //calculate the position of the 
         private void calGetXandY(List<Tags> untrackList, List<Tags> referenceList)
         {
@@ -361,14 +431,15 @@ namespace AXSH3
                     {
                         sum += (l[k] - d[k]) * (l[k] - d[k]);
                     }
-                    untrackList[i].setTagrssi(sum, j);
+                    untrackList[i].setDistinctList(j, sum);
                 }
                 li = untrackList[i].getWeight();
                 List<ArrayList> weightList = sort(li);
                 double x = 0;
                 double y = 0;
                 for (int m = 0; m < 3; m++)
-                {
+                {   
+                    //weight*num
                     x += referenceList[(int)weightList[m][0]].getX() * (int)weightList[m][1];
                     y += referenceList[(int)weightList[m][0]].getY() * (int)weightList[m][1];
                     untrackList[i].setX(x);
@@ -465,6 +536,42 @@ namespace AXSH3
                 WriteLine("An exception has occured : {0}", ex.Message);
             }
             Application.Current.Shutdown();
+        }
+
+        public static int[] calposition()
+        {
+            calpos[0] = 0;
+            calpos[1] = 0;
+            calpos[2] = 0;
+            calpos[3] = 0;
+            calpos[4] = 0;
+
+
+            for (int i = 0; i < nowPos.Length; i++)
+            {
+                if (nowPos[i] == 1)
+                {
+                    calpos[0]++;
+                }
+                else if (nowPos[i] == 2)
+                {
+                    calpos[1]++;
+                }
+                else if (nowPos[i] == 3)
+                {
+                    calpos[2]++;
+                }
+                else if (nowPos[i] == 4)
+                {
+                    calpos[3]++;
+                }
+                else
+                {
+                    calpos[4]++;
+                }
+
+            }
+            return calpos;
         }
        
     }

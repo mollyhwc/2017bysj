@@ -34,5 +34,7 @@ namespace AXSH2
             this.pos.Text = pos;
         }
 
+       
+
     }
 }
